@@ -13,7 +13,8 @@ import { prisma } from './helpers/singleExport.helper.js';
 // ds
 
 
-const PORT = process.env.SERVER_PORT || 3100;
+const PORT = process.env.PORT || 3100;
+
 const corsOptions = {
 	origin: (origin, callback) => {
 		if (true) {
