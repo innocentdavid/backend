@@ -29,10 +29,10 @@ const corsOptions = {
 const app = express();
 
 
-app.use(function (req, res, next) {
-	req.headers.origin = req.headers.origin || req.headers.host;
-	next();
-});
+// app.use(function (req, res, next) {
+// 	req.headers.origin = req.headers.origin || req.headers.host;
+// 	next();
+// });
 // app.use(cors(corsOptions));
 app.use(cors({
 	origin: '*'
