@@ -12,7 +12,6 @@ import appRoutes from './routes/index.route.js';
 import { prisma } from './helpers/singleExport.helper.js';
 // ds
 
-
 const PORT = process.env.PORT || 3100;
 
 const corsOptions = {
@@ -34,7 +33,10 @@ app.use(function (req, res, next) {
 	req.headers.origin = req.headers.origin || req.headers.host;
 	next();
 });
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors({
+	origin: '*'
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression({
