@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import listEndpoints from 'express-list-endpoints';
@@ -7,6 +7,11 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
 dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 
 import appRoutes from './routes/index.route.js';
 import { prisma } from './helpers/singleExport.helper.js';
@@ -28,6 +33,7 @@ const corsOptions = {
 
 const app = express();
 
+const ui = Router();
 
 // app.use(function (req, res, next) {
 // 	req.headers.origin = req.headers.origin || req.headers.host;
@@ -55,6 +61,11 @@ app.use(compression({
 }));
 app.use(cookieParser());
 
+ui.get('/', async (req, res) => {
+	res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
+app.use('/', ui)
 
 app.use('/api/', appRoutes);
 
